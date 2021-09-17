@@ -2,6 +2,7 @@ package co.com.cloud.movies.serviceshowtime.services;
 
 
 import co.com.cloud.movies.serviceshowtime.entities.Showtime;
+import co.com.cloud.movies.serviceshowtime.movie.MovieClient;
 import co.com.cloud.movies.serviceshowtime.repositories.ShowtimeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -13,6 +14,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ShowtimeServicelmpl implements ShowtimeService{
     private final ShowtimeRepository showtimeRepository;
+    private final MovieClient movieClient;
 
     @Override
     @Transactional(rollbackFor = Exception.class)
@@ -33,7 +35,6 @@ public class ShowtimeServicelmpl implements ShowtimeService{
     }
 
     @Override
-    public Showtime findById(Long id) {
-        return showtimeRepository.findById(id).orElse(null);
-    }
+    public Showtime findById(Long id) { return showtimeRepository.findById(id).orElse(null); }
+
 }

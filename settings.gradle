@@ -4,4 +4,7 @@ include 'service-user'
 include 'service-movie'
 include 'service-showtime'
 include 'service-config'
+include 'service-eureka'
+include 'service-booking'
+include 'service-gateway'
 

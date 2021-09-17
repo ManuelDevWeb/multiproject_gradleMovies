@@ -1,15 +1,17 @@
-package co.com.cloud.movies.servicemovie;
+package co.com.cloud.movies.servicebooking;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 
 @EnableEurekaClient
 @SpringBootApplication
-public class ServiceMovieApplication {
+@EnableFeignClients
+public class ServiceBookingApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ServiceMovieApplication.class, args);
+		SpringApplication.run(ServiceBookingApplication.class, args);
 	}
 
 }

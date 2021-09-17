@@ -1,5 +1,6 @@
 package co.com.cloud.movies.serviceshowtime.entities;
 
+import co.com.cloud.movies.serviceshowtime.model.Movie;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
@@ -7,6 +8,8 @@ import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Objects;
 
@@ -29,6 +32,8 @@ public class Showtime {
     private Date date;
 
     // TO DO MOVIES
+    @Transient
+    private Movie movieId;
 
     @Override
     public boolean equals(Object o) {
