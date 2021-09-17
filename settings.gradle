@@ -7,4 +7,5 @@ include 'service-config'
 include 'service-eureka'
 include 'service-booking'
 include 'service-gateway'
+include 'service-admin'
 
