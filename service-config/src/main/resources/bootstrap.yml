@@ -5,7 +5,7 @@ spring:
     config:
       server:
         git:
-          uri: file:///E:/Poli2021-1/CLOUD/Repos/config-data
+          uri: file:///F:/Cloud Computing/config-data
   security:
     user:
       name: ${CONFIG_USER}
