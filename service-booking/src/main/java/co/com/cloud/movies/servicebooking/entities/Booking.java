@@ -1,36 +1,34 @@
 package co.com.cloud.movies.servicebooking.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
-import javax.validation.Valid;
-import java.util.List;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
 import java.util.Objects;
 
-@Setter
 @Getter
+@Setter
 @Entity
-@Table(name = "bookings")
+@Table(name="bookings")
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class Booking {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="id", updatable = false,nullable = false,unique = true)
     private Long id;
-    @Column(name = "showtime_id")
-    private String numberInvoice;
-    @Column(name = "user_id")
-    private Long UserId;
-    @Transient
-    private User user;
-    @Transient
-    private Showtime showtime;
 
-    @Valid
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name="booking_id")
-    @JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
-    private List<BookingItem> items;
+    @NotNull()
+    @Column(name="userId")
+    private Long userId;
+
+    @NotNull()
+    @Column(name="showtimeId")
+    private Long showtimeId;
 
     @Override
     public boolean equals(Object o) {

@@ -1,20 +1,32 @@
 package co.com.cloud.movies.servicebooking.services;
 
-public class BookinServiceImpl {
+import co.com.cloud.movies.servicebooking.entities.Booking;
+import co.com.cloud.movies.servicebooking.repositories.BookingRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+
+@Service
+@RequiredArgsConstructor
+public class BookinServiceImpl implements BookingService{
     private final BookingRepository bookingRepository;
-    private final UserClient userClient;
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public void save(Booking booking) {
         bookingRepository.save(booking);
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public void delete(Booking booking) {
         bookingRepository.delete(booking);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<Booking> findAll() {
         return bookingRepository.findAll();
     }
@@ -24,20 +36,4 @@ public class BookinServiceImpl {
         return bookingRepository.findById(id).orElse(null);
     }
 
-    @Override
-    public Booking findByNumberBooking(String numberBooking) {
-        Booking booking = bookingRepository.findByNumberBooking(numberBooking);
-        ModelMapper modelMapper = new ModelMapper();
-        User user  = modelMapper.map(userClient.findById(booking.getUserId()).getData(),User.class);
-        //Customer customer  = (Customer)customerClient.findById(invoice.getCustomerId()).getData();
-        booking.setUser(user);
-        List<BookingItem> itemList = booking.getItems().stream()
-                .map( bookingItem -> {
-                    Movie movie = modelMapper.map(movieClient.findById(bookingItem.getMovieId()).getData(),Movie.class);
-                    //Product product = (Product)productClient.findById(invoiceItem.getProductId()).getData();
-                    bookingItem.setMovie(movie);
-                    return bookingItem;
-                }).collect(Collectors.toList());
-        return bookingRepository.findByNumberBooking(numberBooking);
-    }
 }
